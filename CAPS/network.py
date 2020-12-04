@@ -60,7 +60,7 @@ class CAPSNet(nn.Module):
         :param norm: if l2 normalize features
         :return: the extracted features, [batch_size, n_pts, n_dim]
         '''
-        feat = F.grid_sample(x, coord_n.unsqueeze(2)).squeeze(-1)
+        feat = F.grid_sample(x, coord_n.unsqueeze(2), align_corners=True).squeeze(-1)
         if norm:
             feat = F.normalize(feat)
         feat = feat.transpose(1, 2)
